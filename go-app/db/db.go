@@ -12,6 +12,8 @@ import (
 var db *gorm.DB
 
 func init() {
+	log.SetFormatter(&log.JSONFormatter{})
+	
 	username := os.Getenv("db_user")
 	password := os.Getenv("db_pass")
 	dbName := os.Getenv("db_name")
