@@ -15,11 +15,6 @@ http://localhost:8080/swagger-ui/index.html
 
 ## Installation
 
-You can clone this repository and use it localy:
-```sh
-$ git clone https://github.com/NAntigravity/ShopAPI.git
-```
-
 **Using Maven plugin**
 
 First you should do clean installation:
