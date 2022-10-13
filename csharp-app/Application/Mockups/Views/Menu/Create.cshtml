@@ -1,0 +1,38 @@
+﻿@using Mockups.Storage
+@model Mockups.Models.Menu.CreateMenuItemViewModel
+
+<h3>Создать блюдо</h3>
+<form asp-action="Create" asp-controller="Menu" method="Post"
+      enctype="multipart/form-data">
+    <!--enctype атрибут ОБЯЗАТЕЛЕН чтобы файл улетел с формы-->
+    <div class="mb-3">
+        <label asp-for="Name" class="form-label"></label>
+        <input type="text" class="form-control" asp-for="Name">
+        <span class="text-danger" asp-validation-for="Name"></span>
+    </div>
+    <div class="mb-3">
+        <label class="form-label" asp-for="Category"></label>
+        <select asp-for="@Model.Category" asp-items="@Html.GetEnumSelectList<MenuItemCategory>()"></select>
+        <span class="text-danger" asp-validation-for="Category"></span>
+    </div>
+    <div class="mb-3">
+        <input class="form-check-input" type="checkbox" id="flexCheckChecked" asp-for=IsVegan>
+        <label class="form-label" asp-for="IsVegan"></label>
+    </div>
+    <div class="mb-3">
+        <label class="form-label" asp-for="Description"></label>
+        <textarea class="form-control" asp-for="Description"></textarea>
+        <span class="text-danger" asp-validation-for="Description"></span>
+    </div>
+    <div class="mb-3">
+        <label class="form-label" asp-for="Price"></label>
+        <input type="number" class="form-control" asp-for="Price">
+        <span class="text-danger" asp-validation-for="Price"></span>
+    </div>
+    <div class="mt-3">
+        <label class="form-label" for="file">Фото блюда</label>
+        <input asp-for="File" type="file" id="file" class="form-control">
+    </div>
+    <div class="text-danger" asp-validation-summary="All"></div>
+    <button type="submit" class="btn btn-primary">Сохранить</button>
+</form>

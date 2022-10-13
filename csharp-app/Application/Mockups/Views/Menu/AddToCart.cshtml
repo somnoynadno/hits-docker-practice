@@ -1,0 +1,41 @@
+﻿@using Mockups.Models.Cart
+@using Mockups.Models.Menu
+@using Mockups.Storage;
+
+@model AddToCartViewModel
+
+<h3>Добавить блюдо в корзину?</h3>
+@using (Html.BeginForm("AddToCart", "Menu", Model.Item.Id, FormMethod.Post))
+{
+    
+    <div class="mb-3">
+        <label class="form-label" asp-for="Amount"></label>
+        <input type="number" min=1 max=100 asp-for="Amount" />
+        <span class="text-danger" asp-validation-for="Amount"></span>
+    </div>
+    <button class="btn btn-success" type="submit">Добавить</button>
+}
+
+<div class="row row-cols-1">
+    <div class="col-12 col-md-4">
+        <div class="card">
+            <img src="/@Model.Item.PhotoPath" class="card-img-top">
+            <div class="card-body">
+                <h5 class="card-title mb-0">@Model.Item.Name</h5>
+                <p class="mt-0 mb-0">Категория - @Model.Item.Category.GetDisplayName()</p>
+                @if (Model.Item.IsVegan)
+                {
+                    <p class="mt-0">Вегетерианское</p>
+                }
+                else
+                {
+                    <p class="mt-0">Не вегетерианское</p>
+                }
+                <p class="card-text">@Model.Item.Description</p>
+            </div>
+            <div class="card-footer d-flex justify-content-between">
+                <span class="align-self-center">Цена - @(Model.Item.Price)р</span>
+            </div>
+        </div>
+    </div>
+</div>

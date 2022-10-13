@@ -1,0 +1,49 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model Mockups.Models.Account.IndexViewModel
+@{
+}
+<h1>Информация о пользователе</h1>
+<h3>Основная информация</h3>
+<div class="row mb-1">
+    <div class="col-sm-3">ФИО</div>
+    <div class="col-sm-9">@Model.Name</div>
+</div>
+<div class="row mb-1">
+    <div class="col-sm-3">День рождения</div>
+    <div class="col-sm-9">@Model.BirthDate.ToString("MM-dd-yyyy")</div>
+</div>
+<div class="row mb-1">
+    <div class="col-sm-3">Телефон</div>
+    <div class="col-sm-9">@Model.Phone</div>
+</div>
+<a class="btn btn-primary mb-1" href="/Account/Edit">Изменить данные</a>
+<h3>Адреса</h3>
+<ul class="list-group mb-1">
+    @foreach (var address in Model.Addresses)
+    {
+        <li class="list-group-item">
+            <div class="row no-gutters align-items-center border border-light border-bottom-0 border-top-0 border-right-0 p-1">
+                <div class="col-12 col-md-10">
+                    <div class="row">
+                        <div class="col-12">
+                            <p class=" text-uppercase h5">@address.Name</p>
+                        </div>
+                        <div class="col-12">
+                            <p class="mb-1">@address.AddressString</p>
+                        </div>
+                        <div class="form-text">@address.Note</div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-2 text-end">
+                    <div class="btn-group" role="group">
+                        <a class="btn btn-outline-warning" asp-controller="Account" asp-action="EditAddress" asp-route-id="@address.Id"><i class="fas fa-pen"></i></a>
+                        <a class="btn btn-outline-danger" asp-controller="Account" asp-action="DeleteAddress" asp-route-id="@address.Id"><i class="fas fa-trash-alt"></i></a>
+                    </div>
+                </div>
+            </div>
+        </li>
+    }
+</ul>
+<a class="btn btn-primary" asp-controller="Account" asp-action="AddAddress">Добавить адрес</a>

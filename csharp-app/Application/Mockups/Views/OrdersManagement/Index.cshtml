@@ -1,0 +1,21 @@
+﻿@model Mockups.Models.OrdersManagement.OrdersManagementIndexViewModel
+
+
+<div class="row">
+    <div class="col-12">
+        <h1 class="mb-3">Список заказов</h1>
+        <ul class="list-group">
+            @foreach (var item in Model.Items)
+            {
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+                    <div class="ms-2 me-auto">
+                        <div class="fw-bold"><a asp-controller="OrdersManagement" asp-action="Details" asp-route-id="@item.Id">Заказ #@item.Id от @item.Date</a></div>
+                        <div>Статус заказа - @item.Status</div>
+                        <div>@item.StatusInfo</div>
+                        <div>Список блюд - @item.Contents</div>
+                    </div>
+                </li>
+            }
+        </ul>
+    </div>
+</div>

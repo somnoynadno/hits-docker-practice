@@ -1,0 +1,37 @@
+﻿@model Mockups.Models.OrdersManagement.OrderInfoViewModel
+
+<div class="row">
+    <div class="col-12">
+        <h1 class="mb-3">Последние заказы</h1>
+        <ul class="list-group">
+            <li class="list-group-item d-flex justify-content-between align-items-start">
+                <div class="ms-2 me-auto">
+                    <div class="fw-bold">Заказ #@Model.Id от @Model.CreationTime</div>
+                    <div>Статус заказа - @Model.Status</div>
+                    <div>@Model.StatusInfo</div>
+                    <div>Адрес доставки - @(Model.Address)</div>
+                    <div>
+                        Список блюд:
+                        <ol class="list-group list-group-numbered">
+                            @foreach (var item in Model.Items)
+                            {
+                                <li class="list-group-item d-flex justify-content-between align-items-start">
+                                    <div class="ms-2 me-auto">
+                                        <div class="fw-bold">@item.Name<span class="badge bg-primary rounded-pill ms-3">@item.Amount</span></div>
+                                    </div>
+                                </li>
+                            }
+                        </ol>
+                    </div>
+                    <div>Стоимость: @(Model.TotalCost)р</div>
+                    @if (Model.Status != "Доставлен")
+                    {
+                        <div>
+                            <a class="btn btn-warning" asp-controller="OrdersManagement" asp-action="Edit" asp-route-id="@Model.Id">Редактировать</a>
+                        </div>
+                    }
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

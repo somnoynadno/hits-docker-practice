@@ -1,0 +1,95 @@
+﻿@{
+    ViewData["Title"] = "Оформление заказа";
+}
+@model Mockups.Models.Orders.OrderCreateWrapperViewModel
+<!--
+    Содержание корзины
+
+    Выбор адреса
+
+    Выбор времени доставки
+-->
+
+
+<div class="row">
+    <div class="col-12">
+        <h1>Оформление заказа</h1>
+    </div>
+    <div class="col-12">
+        @if (!Model.GetModel.Items.Any())
+        {
+            <h4>Ваша корзина пуста.</h4>
+        }
+        else
+        {
+            <ol class="list-group list-group-numbered">
+                @foreach (var item in Model.GetModel.Items)
+                {
+                    <li class="list-group-item d-flex justify-content-between align-items-start">
+                        <div class="ms-2 me-auto">
+                            <div class="fw-bold">@item.Name<span class="badge bg-primary rounded-pill ms-3">@item.Amount</span></div>
+                        </div>
+                    </li>
+                }
+            </ol>
+            @if (Model.GetModel.Discount > 0)
+            {
+                <p>@(Model.GetModel.DiscountDescription)</p>
+            }
+            <p>Стоимость: @Model.GetModel.Price.ToString("0.00")</p>
+            <p>Скидка: @Model.GetModel.Discount.ToString("0")%</p>
+            <p>Итого: @((Model.GetModel.Price * (100 - Model.GetModel.Discount) / 100).ToString("0.00"))</p>
+        }
+    </div>
+    @if (Model.GetModel.Items.Any())
+    {
+        <div class="col-12">
+            <form asp-action="Create" asp-controller="Orders" method="POST">
+                <div class="card-body">
+                    <div class="form-row">
+                        <div class="form-group col">
+                            <label for="#addressSelect">Адрес доставки</label>
+                            <select id="addressSelect" asp-for=PostModel.Address>
+                                @foreach (var address in Model.GetModel.Addresses)
+                                {
+                                    if (address == Model.GetModel.Addresses.First())
+                                    {
+                                        <option value="@address" selected>@(address)</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@address">@(address)</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                        <div class="form-group col">
+                            <label for="#deliveryTimeSelect">Время доставки</label>
+                            <select id="deliveryTimeSelect" asp-for=PostModel.DeliveryTime>
+                                @foreach (var time in Model.GetModel.DeliveryTimeOptions)
+                                {
+                                    if (time == Model.GetModel.DeliveryTimeOptions.First())
+                                    {
+                                        <option value="@time" selected>@time.ToString("MM.dd.yyyy HH:mm")</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@time">@time.ToString("MM.dd.yyyy HH:mm")</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-success">Оформить</button>
+                    <a class="btn btn-secondary" asp-action="Index" asp-controller="Orders">Отмена</a>
+                </div>
+            </form>
+        </div>
+    }
+    else
+    {
+        <h4>Нельзя оформить заказ с пустой корзиной</h4>
+    }
+</div>

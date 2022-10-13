@@ -1,0 +1,24 @@
+﻿@model Mockups.Models.Account.AddressShortViewModel
+<h3>Вы уверены, что хотите удалить данный адрес?</h3>
+<ul class="list-group mb-1">
+    <li class="list-group-item">
+            <div class="row no-gutters align-items-center border border-light border-bottom-0 border-top-0 border-right-0 p-1">
+                <div class="col-12 col-md-10">
+                    <div class="row">
+                        <div class="col-12">
+                            <p class=" text-uppercase h5">@Model.Name</p>
+                        </div>
+                        <div class="col-12">
+                            <p class="mb-1">@Model.AddressString</p>
+                        </div>
+                        <div class="form-text">@Model.Note</div>
+                    </div>
+                </div>
+            </div>
+        </li>
+</ul>
+@using (Html.BeginForm("DeleteAddress", "Account", Model.Id, FormMethod.Post))
+{
+    <button class="btn btn-danger">Удалить</button>
+}
+<a class="btn btn-secondary" asp-controller="Account" asp-action="Index">Отмена</a>

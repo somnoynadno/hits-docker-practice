@@ -1,0 +1,25 @@
+﻿@model Mockups.Models.Account.LoginViewModel
+@{
+    ViewData["Title"] = "Вход в систему";
+}
+
+<div class="row">
+    <div class="col-12">
+        <h1 class="mb-3">Авторизация</h1>
+        
+        <form asp-action="Login" asp-controller="Account" method="POST">
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Email address</label>
+                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" asp-for="Email">
+                <span class="text-danger" asp-validation-for="Email"></span>
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Password</label>
+                <input type="password" class="form-control" id="exampleInputPassword1" asp-for="Password">
+                <span class="text-danger" asp-validation-for="Password"></span>
+            </div>
+            <div class="text-danger" asp-validation-summary="All"></div>
+            <button type="submit" class="btn btn-primary">Войти</button>
+        </form>
+    </div>
+</div>

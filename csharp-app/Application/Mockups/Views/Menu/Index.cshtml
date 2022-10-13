@@ -1,0 +1,76 @@
+﻿@using Mockups.Models.Menu
+@using Mockups.Storage
+@model List<MenuItemViewModel>
+@{
+    ViewData["Title"] = "Меню";
+}
+
+<div class="row mb-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                Фильтры
+            </div>
+            <div class="card-body">
+                <form asp-action="Index" asp-controller="Menu" method="GET">
+                    <div class="row">
+                        <div class="col-4">
+                            <label class="form-check-label" for="filterCategory">Категория блюда</label>
+                            <select name="filterCategory"  id="filterCategory" asp-items="@Html.GetEnumSelectList<MenuItemCategory>()" multiple></select>
+                        </div>
+                        <div class="col-4 d-flex">
+                            <div class="form-check align-self-center">
+                                <input class="form-check-input" type="checkbox" value="true" name="filterIsVegan" id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Показать только вегетерианские
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-4 d-flex justify-content-end">
+                            <button class="align-self-center btn btn-primary" type="submit">Применить</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+            @foreach (var item in Model)
+            {
+                <div class="col">
+                    <div class="card">
+                        <img src="@item.PhotoPath" class="card-img-top" alt="WOK">
+                        <div class="card-body">
+                            <h5 class="card-title mb-0">@item.Name</h5>
+                            <p class="mt-0 mb-0">Категория - @item.Category.GetDisplayName()</p>
+                            @if (item.IsVegan)
+                            {
+                                <p class="mt-0">Вегетерианское</p>
+                            }
+                            else
+                            {
+                                <p class="mt-0">Не вегетерианское</p>
+                            }
+                            <p class="card-text">@item.Description</p>
+                        </div>
+                        <div class="card-footer d-flex justify-content-between">
+                            <span class="align-self-center">Цена - @(item.Price)р</span>
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                if (User.IsInRole(ApplicationRoleNames.Administrator))
+                                {
+                                    <a class="btn btn-sm btn-danger" asp-controller="Menu" asp-action="Delete" asp-route-id="@item.Id">Удалить</a>
+                                }
+                                <a class="btn btn-sm btn-primary" asp-controller="Menu" asp-action="AddToCart" asp-route-id="@item.Id">В корзину</a>
+                            }
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

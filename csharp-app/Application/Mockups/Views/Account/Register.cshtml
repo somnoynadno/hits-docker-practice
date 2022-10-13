@@ -1,0 +1,41 @@
+﻿@model Mockups.Models.Account.RegisterViewModel
+@{
+    ViewData["Title"] = "Регистрация";
+}
+
+<div class="row">
+    <div class="col-12">
+        <h1 class="mb-3">Регистрация нового пользователя</h1>
+        
+        <form asp-action="Register" asp-controller="Account" method="POST">
+            <div class="mb-3">
+                <label for="fio" class="form-label">ФИО</label>
+                <input type="text" class="form-control" id="fio" asp-for="Name">
+                <span class="text-danger" asp-validation-for="Name"></span>
+            </div>
+            <div class="mb-3">
+                <label for="phone" class="form-label">Телефон</label>
+                <input type="text" class="form-control" id="phone" asp-for="Phone">
+                <span class="text-danger" asp-validation-for="Phone"></span>
+            </div>
+            <div class="mb-3">
+                <label for="birthdate" class="form-label">День рождения</label>
+                <input type="date" class="form-control" id="birthdate" asp-for="BirthDate">
+                <span class="text-danger" asp-validation-for="BirthDate"></span>
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Email адрес</label>
+                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" asp-for="Email">
+                <div id="emailHelp" class="form-text">Email будет использоваться для входа в систему</div>
+                <span class="text-danger" asp-validation-for="Email"></span>
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Пароль</label>
+                <input type="password" class="form-control" id="exampleInputPassword" asp-for="Password">
+                <span class="text-danger" asp-validation-for="Password"></span>
+            </div>
+            <div class="text-danger" asp-validation-summary="All"></div>
+            <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
+        </form>
+    </div>
+</div>

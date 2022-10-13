@@ -1,0 +1,7 @@
+﻿@model Mockups.Models.Cart.DeleteFromCartViewModel
+<h3>Вы действительно хотите удалить блюдо "@(Model.Name)" из корзины?</h3>
+@using (Html.BeginForm("Delete", "Cart", Model.Id, FormMethod.Post))
+{
+    <button type="submit" class="btn btn-danger">Удалить</button>
+    <a class="btn btn-secondary" asp-controller="Cart" asp-action="Index">Отмена</a>
+}

@@ -1,0 +1,21 @@
+﻿@model Mockups.Models.Account.EditUserDataViewModel
+
+<form asp-action="Edit" asp-controller="Account" method="POST">
+    <div class="mb-3">
+        <label for="fio" class="form-label">ФИО</label>
+        <input type="text" class="form-control" id="fio" value="@Model.Name" asp-for="Name" required>
+        <span class="text-danger" asp-validation-for="Name"></span>
+    </div>
+    <div class="mb-3">
+        <label for="phone" class="form-label">Телефон</label>
+        <input type="text" class="form-control" id="phone" value="@Model.Phone" asp-for="Phone" required>
+        <span class="text-danger" asp-validation-for="Phone"></span>
+    </div>
+    <div class="mb-3">
+        <label for="birthdate" class="form-label">День рождения</label>
+        <input type="date" class="form-control" id="birthdate" value="@Model.BirthDate.ToString("yyyy-MM-dd")" asp-for="BirthDate" required">
+        <span class="text-danger" asp-validation-for="BirthDate"></span>
+    </div>
+    <button type="submit" class="btn btn-success">Изменить</button>
+    <a class="btn btn-secondary" asp-controller="Account" asp-action="Index">Отмена</a>
+</form>

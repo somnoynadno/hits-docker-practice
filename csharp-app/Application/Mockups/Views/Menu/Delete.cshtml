@@ -1,0 +1,41 @@
+﻿@using Mockups.Storage
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model Mockups.Models.Menu.MenuItemViewModel
+
+<div class="row">
+    <div class="col-12">
+        <h1>Удалить данное блюдо?</h1>
+    </div>
+    <div class="col-12">
+        @using (Html.BeginForm("Delete", "Menu", Model.Id, FormMethod.Post))
+        {
+            <button class="btn btn-danger">Удалить</button>
+            <a class="btn btn-secondary" asp-controller="Menu" asp-action="Index">Отмена</a>
+        }
+    </div>
+</div>
+<div class="row row-cols-1">
+    <div class="col-12 col-md-4 mx-auto">
+        <div class="card">
+            <img src="/@Model.PhotoPath" class="card-img-top" alt="WOK">
+            <div class="card-body">
+                <h5 class="card-title mb-0">@Model.Name</h5>
+                <p class="mt-0 mb-0">Категория - @Model.Category.GetDisplayName()</p>
+                @if (Model.IsVegan)
+                {
+                    <p class="mt-0">Вегетерианское</p>
+                }
+                else
+                {
+                    <p class="mt-0">Не вегетерианское</p>
+                }
+                <p class="card-text">@Model.Description</p>
+            </div>
+            <div class="card-footer d-flex justify-content-between">
+                <span class="align-self-center">Цена - @(Model.Price)р</span>
+            </div>
+        </div>
+    </div>
+</div>

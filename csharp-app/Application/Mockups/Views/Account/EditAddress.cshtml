@@ -1,0 +1,69 @@
+﻿@model Mockups.Models.Account.EditAddressViewModel
+<div class="card mb-2">
+    <div class="card-header">
+        Изменить адрес
+    </div>
+    <div>
+        <form asp-action="EditAddress" asp-controller="Account" method="POST">
+            <div class="card-body">
+                <div class="form-row">
+                    <div class="form-group col">
+                        <label for="#nameInput">Название</label>
+                        <input type="text" class="form-control" id="nameInput" value="@Model.Name" asp-for=Name required>
+                        <span class="text-danger" asp-validation-for="Name"></span>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col">
+                        <label for="#streetInput">Улица</label>
+                        <input type="text" class="form-control" id="streetInput" value="@Model.StreetName" asp-for=StreetName required>
+                        <span class="text-danger" asp-validation-for="StreetName"></span>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col">
+                        <label for="#houseNumberInput">Дом</label>
+                        <input type="text" class="form-control" id="houseNumberInput" value="@Model.HouseNumber" asp-for=HouseNumber required>
+                        <span class="text-danger" asp-validation-for="HouseNumber"></span>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col">
+                        <label for="#entranceNumberInput">Подъезд</label>
+                        <input type="text" class="form-control" id="entranceNumberInput" value="@Model.EntranceNumber" asp-for=EntranceNumber>
+                        <span class="text-danger" asp-validation-for="EntranceNumber"></span>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col">
+                        <label for="#flatNumberInput">Квартира</label>
+                        <input type="text" class="form-control" id="flatNumberInput" value="@Model.FlatNumber" asp-for=FlatNumber required>
+                        <span class="text-danger" asp-validation-for="FlatNumber"></span>
+                    </div>
+                </div>
+                <div class="form-check">
+                    @if (Model.IsMainAddress)
+                    {
+                        <input class="form-check-input" type="checkbox" id="flexCheckChecked" value="@Model.IsMainAddress" asp-for=IsMainAddress disabled>
+                    }
+                    else
+                    {
+                        <input class="form-check-input" type="checkbox" id="flexCheckChecked" value="@Model.IsMainAddress" asp-for=IsMainAddress>
+                    }
+                    <label class="form-check-label" for="flexCheckChecked">Сделать основным адресом</label>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col">
+                        <label for="#noteInput">Приметчание</label>
+                        <input type="text" class="form-control" id="nameInput" asp-for=Note>
+                        <span class="text-danger" asp-validation-for="Note"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <button type="submit" class="btn btn-success">Изменить</button>
+                <a class="btn btn-secondary" asp-controller="Account" asp-action="Index">Отмена</a>
+            </div>
+        </form>
+    </div>
+</div>

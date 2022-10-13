@@ -1,0 +1,31 @@
+﻿@using Mockups.Storage
+@model Mockups.Models.OrdersManagement.OrderEditViewModel
+
+<div class="row">
+    <div class="col-12">
+        <h1>Заказ #@(Model.GetModel.Id) от @(Model.GetModel.CreationTime)</h1>
+        <form asp-action="Edit" asp-controller="OrdersManagement" method="POST">
+            <input type="hidden" asp-for=PostModel.orderId value=@Model.GetModel.Id/>
+            <div class="mb-3">
+                <label for="#delivery" class="form-label">Время доставки</label>
+                <input asp-for=PostModel.DeliveryTime id="delivery" type="datetime-local" value="@Model.GetModel.DeliveryTime.ToString("yyyy-MM-ddTHH:mm")"/>
+                <span class="text-danger" asp-validation-for="@Model.PostModel.DeliveryTime"></span>
+            </div>
+            <div class="mb-3">
+                <label for="#status" class="form-label">Время доставки</label>
+                <select id="status" asp-for="PostModel.Status">
+                    <option value=@Model.GetModel.CurrentStatus>@Model.GetModel.CurrentStatus.GetDisplayName()</option>
+                    @if (@Model.GetModel.NextStatus != null)
+                    {
+                        <option value=@Model.GetModel.NextStatus>@(((OrderStatus)Model.GetModel.NextStatus).GetDisplayName())</option>
+                    }
+                </select>
+                <span class="text-danger" asp-validation-for="@Model.PostModel.Status"></span>
+            </div>
+            <div class="mb-3">
+                <button type="submit" class="btn btn-success">Изменить</button>
+                <a class="btn btn-secondary" asp-controller="OrdersManagement" asp-action="Index">Отмена</a>
+            </div>
+        </form>
+    </div>
+</div>
